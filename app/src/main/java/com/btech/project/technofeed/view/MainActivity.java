@@ -26,7 +26,6 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.btech.project.technofeed.TechnoFeedApplication;
@@ -134,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         accountHeader = new AccountHeaderBuilder()
                 .withActivity(this)
-                .withHeaderBackground(R.raw.ic_name)
+                .withHeaderBackground(R.raw.ic_background)
                 .withSavedInstance(savedInstanceState)
                 .build();
 
@@ -309,7 +308,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     private void onLoadingSwipeRefreshLayout() {
         if (!UtilityMethods.isNetworkAvailable()) {
-            Toast.makeText(MainActivity.this, "Could not load latest News. Please turn on the Internet.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "No internet connection!", Toast.LENGTH_SHORT).show();
         }
         swipeRefreshLayout.post(
                 new Runnable() {

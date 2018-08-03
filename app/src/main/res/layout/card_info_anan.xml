@@ -30,7 +30,7 @@
             android:src="@mipmap/ic_anan" />
 
         <TextView
-            android:id="@+id/tv_card_info"
+            android:id="@+id/tv_card_info_anan"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/tv_card_layout_margin"

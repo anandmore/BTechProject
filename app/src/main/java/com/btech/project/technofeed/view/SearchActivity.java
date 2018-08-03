@@ -150,7 +150,7 @@ public class SearchActivity extends AppCompatActivity {
                         mSwipeRefreshSearch.setEnabled(false);
                         mTxvNoResultsFound.setVisibility(View.VISIBLE);
                         mRecyclerViewSearch.setVisibility(View.GONE);
-                        mTxvNoResultsFound.setText("No Results found for \"" + search + "\"." );
+                        mTxvNoResultsFound.setText("No results found for \"" + search + "\" !" );
                     }
                 }
             }

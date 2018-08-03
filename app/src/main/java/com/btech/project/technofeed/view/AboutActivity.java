@@ -46,9 +46,9 @@ public class AboutActivity extends AppCompatActivity {
     }
 
     private void createInfoTextView() {
-        TextView aboutHeaderAppName = findViewById(R.id.about_header_app_name);
-        TextView aboutHeaderAppDescription = findViewById(R.id.about_header_app_description);
-        TextView cardInfo = findViewById(R.id.tv_card_info);
+        TextView cardInfo1 = findViewById(R.id.tv_card_info_anand);
+        TextView cardInfo2 = findViewById(R.id.tv_card_info_ritesh);
+        TextView cardInfo3 = findViewById(R.id.tv_card_info_anan);
         TextView madeWithLove = findViewById(R.id.tv_made_with_love);
         TextView librariesUsed = findViewById(R.id.tv_libraries_used);
         TextView info1 = findViewById(R.id.tv_info1);
@@ -60,9 +60,9 @@ public class AboutActivity extends AppCompatActivity {
         TextView info4 = findViewById(R.id.tv_info4);
         TextView author4 = findViewById(R.id.tv_author4);
 
-        aboutHeaderAppName.setTypeface(montserrat_semiBold);
-        aboutHeaderAppDescription.setTypeface(montserrat_regular);
-        cardInfo.setTypeface(montserrat_regular);
+        cardInfo1.setTypeface(montserrat_regular);
+        cardInfo2.setTypeface(montserrat_regular);
+        cardInfo3.setTypeface(montserrat_regular);
         madeWithLove.setTypeface(montserrat_regular);
         librariesUsed.setTypeface(montserrat_regular);
         info1.setTypeface(montserrat_semiBold);
