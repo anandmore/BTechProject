@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private Parcelable listState;
     private Typeface montserrat_regular;
     private TextView mTitle;
+    private static final int TIME_INTERVAL = 2000;
+    private long mBackPressed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -363,25 +365,14 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         if (result.isDrawerOpen()) {
             result.closeDrawer();
         } else {
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.MyAlertDialogStyle);
-            builder.setTitle(R.string.app_name);
-            builder.setIcon(R.mipmap.ic_launcher_round);
-            builder.setMessage("Do you want to Exit?")
-                    .setCancelable(false)
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            finish();
-                        }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
-            AlertDialog alert = builder.create();
-            alert.show();
+            if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis())
+            {
+                super.onBackPressed();
+                return;
+            }
+            else { Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show(); }
+
+            mBackPressed = System.currentTimeMillis();
         }
     }
 
