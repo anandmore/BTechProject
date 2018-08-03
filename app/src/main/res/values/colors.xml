@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#212121</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#484848</color>
+    <color name="navigationBarColor">#000000</color>
+    <color name="colorCardView">#212121</color>
+    <color name="colorBackground">#484848</color>
+    <color name="colorDarkBackground">#212121</color>
+    <color name="cardText">#FFFFFF</color>
+    <color name="menuText">#FFFFFF</color>
+    <color name="hintText">#C7C7C7</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <color name="material_drawer_background">#484848</color>
+    <color name="material_drawer_primary_text">#C7C7C7</color>
+    <color name="material_drawer_secondary_text">#C7C7C7</color>
+    <color name="material_drawer_selected">#212121</color>
+    <color name="material_drawer_selected_text">#FFFFFF</color>
+    <color name="material_drawer_header_selection_text">#FFFFFF</color>
+</resources>
