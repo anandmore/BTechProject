@@ -13,6 +13,11 @@ public interface ApiInterface {
     Call<NewsResponse> getHeadlines(@Query("sources") String sources,
                                     @Query("apiKey") String apiKey);
 
+    @GET("top-headlines")
+    Call<NewsResponse> getTopHeadlines(@Query("country") String country,
+                                    @Query("category") String category,
+                                    @Query("apiKey") String apiKey);
+
     @GET("everything")
     Call<NewsResponse> getSearchResults(@Query("q") String query,
                                            @Query("sortBy") String sortBy,

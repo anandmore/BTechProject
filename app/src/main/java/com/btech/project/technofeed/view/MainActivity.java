@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private String[] SOURCE_ARRAY = {"engadget", "techcrunch", "techradar", "the-next-web", "the-verge"};
     private String SOURCE;
     public String URL;
+    public Boolean TOP;
 
     private ArrayList<ArticleStructure> articleStructure = new ArrayList<>();
     private DataAdapter adapter;
@@ -82,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         createRecyclerView();
 
         SOURCE = SOURCE_ARRAY[0];
+        TOP=true;
         mTitle.setText(R.string.toolbar_default_text);
         onLoadingSwipeRefreshLayout();
 
@@ -107,28 +109,28 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     }
 
     private void createDrawer(Bundle savedInstanceState, final Toolbar toolbar, Typeface montserrat_regular) {
-        PrimaryDrawerItem item0 = new PrimaryDrawerItem().withIdentifier(0).withName("NEWS SOURCE")
-                .withTypeface(montserrat_regular).withSelectable(false);
-        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("Engadget")
+        PrimaryDrawerItem item0 = new PrimaryDrawerItem().withIdentifier(0).withName("Top Headlines")
+                .withIcon(R.drawable.ic_whatshot).withTypeface(montserrat_regular);
+        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("NEWS SOURCE")
+                .withTypeface(montserrat_regular).withSelectable(false).withTextColor(getColor(R.color.menuText));
+        PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName("Engadget")
                 .withIcon(R.mipmap.ic_engadget).withTypeface(montserrat_regular);
-        PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName("TechCrunch")
+        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName("TechCrunch")
                 .withIcon(R.mipmap.ic_techcrunch).withTypeface(montserrat_regular);
-        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName("TechRadar")
+        PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(4).withName("TechRadar")
                 .withIcon(R.mipmap.ic_techradar).withTypeface(montserrat_regular);
-        PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(4).withName("The Next Web")
+        PrimaryDrawerItem item5 = new PrimaryDrawerItem().withIdentifier(5).withName("The Next Web")
                 .withIcon(R.mipmap.ic_thenextweb).withTypeface(montserrat_regular);
-        PrimaryDrawerItem item5 = new PrimaryDrawerItem().withIdentifier(5).withName("The Verge")
+        PrimaryDrawerItem item6 = new PrimaryDrawerItem().withIdentifier(6).withName("The Verge")
                 .withIcon(R.mipmap.ic_theverge).withTypeface(montserrat_regular);
-        SectionDrawerItem item6 = new SectionDrawerItem().withIdentifier(6).withName("MORE INFO")
-                .withTypeface(montserrat_regular);
-        SecondaryDrawerItem item7 = new SecondaryDrawerItem().withIdentifier(7).withName("About the app")
+        SecondaryDrawerItem item7 = new SecondaryDrawerItem().withIdentifier(7).withName("MORE INFO")
+                .withTypeface(montserrat_regular).withSelectable(false).withTextColor(getColor(R.color.menuText));
+        SecondaryDrawerItem item8 = new SecondaryDrawerItem().withIdentifier(8).withName("About the app")
                 .withIcon(R.drawable.ic_info).withTypeface(montserrat_regular);
-        SecondaryDrawerItem item8 = new SecondaryDrawerItem().withIdentifier(8).withName("Open Source")
+        SecondaryDrawerItem item9 = new SecondaryDrawerItem().withIdentifier(9).withName("Open Source")
                 .withIcon(R.drawable.ic_code).withTypeface(montserrat_regular);
-        SecondaryDrawerItem item9 = new SecondaryDrawerItem().withIdentifier(9).withName("Powered by newsapi.org")
+        SecondaryDrawerItem item10 = new SecondaryDrawerItem().withIdentifier(10).withName("Powered by newsapi.org")
                 .withIcon(R.drawable.ic_power).withTypeface(montserrat_regular);
-        SecondaryDrawerItem item10 = new SecondaryDrawerItem().withIdentifier(10).withName("Contact us")
-                .withIcon(R.drawable.ic_mail).withTypeface(montserrat_regular);
 
         accountHeader = new AccountHeaderBuilder()
                 .withActivity(this)
@@ -140,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 .withAccountHeader(accountHeader)
                 .withActivity(this)
                 .withToolbar(toolbar)
-                .withSelectedItem(1)
+                .withSelectedItem(0)
                 .addDrawerItems(item0, item1, item2, item3, item4, item5, item6, item7, item8, item9,
                         item10)
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
@@ -148,44 +150,52 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         int selected = (int) (long) drawerItem.getIdentifier();
                         switch (selected) {
-                            case 1:
+                            case 0:
                                 SOURCE = SOURCE_ARRAY[0];
+                                TOP=true;
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
                             case 2:
-                                SOURCE = SOURCE_ARRAY[1];
+                                SOURCE = SOURCE_ARRAY[0];
+                                TOP=false;
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
                             case 3:
-                                SOURCE = SOURCE_ARRAY[2];
+                                SOURCE = SOURCE_ARRAY[1];
+                                TOP=false;
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
                             case 4:
-                                SOURCE = SOURCE_ARRAY[3];
+                                SOURCE = SOURCE_ARRAY[2];
+                                TOP=false;
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
                             case 5:
-                                SOURCE = SOURCE_ARRAY[4];
+                                SOURCE = SOURCE_ARRAY[3];
+                                TOP=false;
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
-                            case 7:
-                                openAboutActivity();
+                            case 6:
+                                SOURCE = SOURCE_ARRAY[4];
+                                TOP=false;
+                                onLoadingSwipeRefreshLayout();
+                                mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
                             case 8:
+                                openAboutActivity();
+                                break;
+                            case 9:
                                 URL="https://github.com/anandmore/BTechProject";
                                 openWebViewActivity();
                                 break;
-                            case 9:
+                            case 10:
                                 URL="https://newsapi.org/";
                                 openWebViewActivity();
-                                break;
-                            case 10:
-                                sendEmail();
                                 break;
                             default:
                                 break;
@@ -197,6 +207,51 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 .build();
     }
 
+    private void loadTopJSON() {
+        swipeRefreshLayout.setRefreshing(true);
+
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(Level.BODY);
+
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.addNetworkInterceptor(new ResponseCacheInterceptor());
+        httpClient.addInterceptor(new OfflineResponseCacheInterceptor());
+        httpClient.cache(new Cache(new File(TechnoFeedApplication.getTechnoFeedApplicationInstance().getCacheDir(), "ResponsesCache"), 10 * 1024 * 1024));
+        httpClient.readTimeout(60, TimeUnit.SECONDS);
+        httpClient.connectTimeout(60, TimeUnit.SECONDS);
+        httpClient.addInterceptor(logging);
+
+        ApiInterface request = ApiClient.getClient(httpClient).create(ApiInterface.class);
+
+        String country="in";
+        String category="technology";
+        Call<NewsResponse> call = request.getTopHeadlines(country, category, Constants.API_KEY);
+        call.enqueue(new Callback<NewsResponse>() {
+
+            @Override
+            public void onResponse(@NonNull Call<NewsResponse> call, @NonNull Response<NewsResponse> response) {
+
+                if (response.isSuccessful() && response.body().getArticles() != null) {
+
+                    if (!articleStructure.isEmpty()) {
+                        articleStructure.clear();
+                    }
+
+                    articleStructure = response.body().getArticles();
+
+                    adapter = new DataAdapter(MainActivity.this, articleStructure);
+                    recyclerView.setAdapter(adapter);
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+            }
+
+
+            @Override
+            public void onFailure(@NonNull Call<NewsResponse> call, @NonNull Throwable t) {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+    }
 
     private void loadJSON() {
         swipeRefreshLayout.setRefreshing(true);
@@ -244,7 +299,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     @Override
     public void onRefresh() {
-        loadJSON();
+        if(TOP==true){
+            loadTopJSON();
+        }
+        else {
+            loadJSON();
+        }
     }
 
     private void onLoadingSwipeRefreshLayout() {
@@ -255,7 +315,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 new Runnable() {
                     @Override
                     public void run() {
-                        loadJSON();
+                        if(TOP==true){
+                            loadTopJSON();
+                        }
+                        else {
+                            loadJSON();
+                        }
                     }
                 }
         );
