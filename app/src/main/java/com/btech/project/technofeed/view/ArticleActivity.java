@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -14,9 +15,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.btech.project.technofeed.R;
 import com.btech.project.technofeed.model.Constants;
+import com.btech.project.technofeed.util.UtilityMethods;
+import com.bumptech.glide.Glide;
 
 
 public class ArticleActivity extends AppCompatActivity {
@@ -35,6 +37,11 @@ public class ArticleActivity extends AppCompatActivity {
         assetManager();
         receiveFromDataAdapter(montserrat_regular, montserrat_semiBold);
         buttonLinktoFullArticle(montserrat_regular);
+
+        if (!UtilityMethods.isNetworkAvailable()) {
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.article_content), "No internet connection", Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
     }
 
     private void assetManager() {

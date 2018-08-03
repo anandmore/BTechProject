@@ -1,6 +1,5 @@
 package com.btech.project.technofeed.network;
 
-import com.btech.project.technofeed.model.ArticleResponse;
 import com.btech.project.technofeed.model.NewsResponse;
 
 import retrofit2.Call;

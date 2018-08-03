@@ -15,16 +15,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.btech.project.technofeed.R;
-import com.btech.project.technofeed.model.Article;
 import com.btech.project.technofeed.model.ArticleStructure;
 import com.btech.project.technofeed.model.Constants;
 import com.btech.project.technofeed.view.ArticleActivity;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 

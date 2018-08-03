@@ -1,6 +1,5 @@
 package com.btech.project.technofeed.view;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
@@ -8,8 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,16 +19,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mikepenz.materialdrawer.AccountHeader;
-import com.mikepenz.materialdrawer.AccountHeaderBuilder;
-import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.Nameable;
-import com.btech.project.technofeed.TechnoFeedApplication;
 import com.btech.project.technofeed.R;
+import com.btech.project.technofeed.TechnoFeedApplication;
 import com.btech.project.technofeed.adapter.DataAdapter;
 import com.btech.project.technofeed.model.ArticleStructure;
 import com.btech.project.technofeed.model.Constants;
@@ -39,6 +30,14 @@ import com.btech.project.technofeed.network.ApiInterface;
 import com.btech.project.technofeed.network.interceptors.OfflineResponseCacheInterceptor;
 import com.btech.project.technofeed.network.interceptors.ResponseCacheInterceptor;
 import com.btech.project.technofeed.util.UtilityMethods;
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -54,6 +53,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
+    private static final int TIME_INTERVAL = 2000;
     public String URL;
     public Boolean TOP;
     private String[] SOURCE_ARRAY = {"engadget", "techcrunch", "techradar", "the-next-web", "the-verge"};
@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private Parcelable listState;
     private Typeface montserrat_regular;
     private TextView mTitle;
-    private static final int TIME_INTERVAL = 2000;
     private long mBackPressed;
 
     @Override
@@ -308,7 +307,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     private void onLoadingSwipeRefreshLayout() {
         if (!UtilityMethods.isNetworkAvailable()) {
-            Toast.makeText(MainActivity.this, "No internet connection!", Toast.LENGTH_SHORT).show();
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.main_activity), "No internet connection", Snackbar.LENGTH_LONG);
+            snackbar.show();
         }
         swipeRefreshLayout.post(
                 new Runnable() {
@@ -365,12 +365,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         if (result.isDrawerOpen()) {
             result.closeDrawer();
         } else {
-            if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis())
-            {
+            if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
                 super.onBackPressed();
                 return;
+            } else {
+                Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
             }
-            else { Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show(); }
 
             mBackPressed = System.currentTimeMillis();
         }

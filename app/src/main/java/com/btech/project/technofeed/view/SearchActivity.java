@@ -2,10 +2,10 @@ package com.btech.project.technofeed.view;
 
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -18,8 +18,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.btech.project.technofeed.TechnoFeedApplication;
 import com.btech.project.technofeed.R;
+import com.btech.project.technofeed.TechnoFeedApplication;
 import com.btech.project.technofeed.adapter.DataAdapter;
 import com.btech.project.technofeed.model.ArticleStructure;
 import com.btech.project.technofeed.model.Constants;
