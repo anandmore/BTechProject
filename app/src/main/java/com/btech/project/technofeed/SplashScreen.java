@@ -18,11 +18,12 @@ public class SplashScreen extends Activity {
         setContentView(R.layout.activity_splash);
 
         final ImageView imageView = (ImageView) findViewById(R.id.splash_image);
-        final Animation animation_1 = AnimationUtils.loadAnimation(getBaseContext(), R.anim.rotate);
-        final Animation animation_2 = AnimationUtils.loadAnimation(getBaseContext(), R.anim.antirotate);
+        final Animation animation_1 = AnimationUtils.loadAnimation(getBaseContext(), R.anim.fade_in);
+        final Animation animation_2 = AnimationUtils.loadAnimation(getBaseContext(), R.anim.rotate);
+        final Animation animation_3 = AnimationUtils.loadAnimation(getBaseContext(), R.anim.antirotate);
 
-        imageView.startAnimation(animation_2);
-        animation_2.setAnimationListener(new Animation.AnimationListener() {
+        imageView.startAnimation(animation_1);
+        animation_1.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
 
@@ -30,7 +31,7 @@ public class SplashScreen extends Activity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                imageView.startAnimation(animation_1);
+                imageView.startAnimation(animation_2);
             }
 
             @Override
@@ -39,7 +40,24 @@ public class SplashScreen extends Activity {
             }
         });
 
-        animation_1.setAnimationListener(new Animation.AnimationListener() {
+        animation_2.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                imageView.startAnimation(animation_3);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        animation_3.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
 
