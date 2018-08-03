@@ -1,1 +1,1 @@
-![TechnoFeed](app/src/main/res/raw/ic_name.png)
+![TechnoFeed](app/src/main/res/raw/ic_background.png)
