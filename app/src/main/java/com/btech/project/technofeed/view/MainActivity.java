@@ -54,11 +54,10 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
-    private String[] SOURCE_ARRAY = {"engadget", "techcrunch", "techradar", "the-next-web", "the-verge"};
-    private String SOURCE;
     public String URL;
     public Boolean TOP;
-
+    private String[] SOURCE_ARRAY = {"engadget", "techcrunch", "techradar", "the-next-web", "the-verge"};
+    private String SOURCE;
     private ArrayList<ArticleStructure> articleStructure = new ArrayList<>();
     private DataAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -82,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         createRecyclerView();
 
         SOURCE = SOURCE_ARRAY[0];
-        TOP=true;
+        TOP = true;
         mTitle.setText(R.string.toolbar_default_text);
         onLoadingSwipeRefreshLayout();
 
@@ -151,37 +150,37 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                         switch (selected) {
                             case 0:
                                 SOURCE = SOURCE_ARRAY[0];
-                                TOP=true;
+                                TOP = true;
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
                             case 2:
                                 SOURCE = SOURCE_ARRAY[0];
-                                TOP=false;
+                                TOP = false;
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
                             case 3:
                                 SOURCE = SOURCE_ARRAY[1];
-                                TOP=false;
+                                TOP = false;
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
                             case 4:
                                 SOURCE = SOURCE_ARRAY[2];
-                                TOP=false;
+                                TOP = false;
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
                             case 5:
                                 SOURCE = SOURCE_ARRAY[3];
-                                TOP=false;
+                                TOP = false;
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
                             case 6:
                                 SOURCE = SOURCE_ARRAY[4];
-                                TOP=false;
+                                TOP = false;
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
@@ -189,11 +188,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                                 openAboutActivity();
                                 break;
                             case 9:
-                                URL="https://github.com/anandmore/BTechProject";
+                                URL = "https://github.com/anandmore/BTechProject";
                                 openWebViewActivity();
                                 break;
                             case 10:
-                                URL="https://newsapi.org/";
+                                URL = "https://newsapi.org/";
                                 openWebViewActivity();
                                 break;
                             default:
@@ -222,8 +221,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         ApiInterface request = ApiClient.getClient(httpClient).create(ApiInterface.class);
 
-        String country="in";
-        String category="technology";
+        String country = "in";
+        String category = "technology";
         Call<NewsResponse> call = request.getTopHeadlines(country, category, Constants.API_KEY);
         call.enqueue(new Callback<NewsResponse>() {
 
@@ -298,10 +297,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     @Override
     public void onRefresh() {
-        if(TOP==true){
+        if (TOP == true) {
             loadTopJSON();
-        }
-        else {
+        } else {
             loadJSON();
         }
     }
@@ -314,10 +312,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 new Runnable() {
                     @Override
                     public void run() {
-                        if(TOP==true){
+                        if (TOP == true) {
                             loadTopJSON();
-                        }
-                        else {
+                        } else {
                             loadJSON();
                         }
                     }

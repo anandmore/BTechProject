@@ -9,27 +9,27 @@ public class ArticleResponse {
     private String sortBy;
     private List<Article> articles;
 
-    public String getStatus(){
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status){
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public String getSource(){
+    public String getSource() {
         return source;
     }
 
-    public void setSource(String source){
+    public void setSource(String source) {
         this.source = source;
     }
 
-    public String getSortBy(){
+    public String getSortBy() {
         return sortBy;
     }
 
-    public void setSortBy(String sortBy){
+    public void setSortBy(String sortBy) {
         this.sortBy = sortBy;
     }
 
@@ -37,7 +37,7 @@ public class ArticleResponse {
         return articles;
     }
 
-    public void setArticles(List<Article> articles){
+    public void setArticles(List<Article> articles) {
         this.articles = articles;
     }
 }

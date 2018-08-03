@@ -145,12 +145,12 @@ public class SearchActivity extends AppCompatActivity {
                         mRecyclerViewSearch.setAdapter(adapter);
                         mSwipeRefreshSearch.setRefreshing(false);
                         mSwipeRefreshSearch.setEnabled(false);
-                    } else if (response.body().getTotalResults() == 0){
+                    } else if (response.body().getTotalResults() == 0) {
                         mSwipeRefreshSearch.setRefreshing(false);
                         mSwipeRefreshSearch.setEnabled(false);
                         mTxvNoResultsFound.setVisibility(View.VISIBLE);
                         mRecyclerViewSearch.setVisibility(View.GONE);
-                        mTxvNoResultsFound.setText("No results found for \"" + search + "\" !" );
+                        mTxvNoResultsFound.setText("No results found for \"" + search + "\" !");
                     }
                 }
             }

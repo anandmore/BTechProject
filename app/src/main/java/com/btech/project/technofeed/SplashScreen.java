@@ -3,6 +3,7 @@ package com.btech.project.technofeed;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -17,9 +18,8 @@ public class SplashScreen extends Activity {
         setContentView(R.layout.activity_splash);
 
         final ImageView imageView = (ImageView) findViewById(R.id.splash_image);
-        final Animation animation_1 = AnimationUtils.loadAnimation(getBaseContext(),R.anim.rotate);
-        final Animation animation_2 = AnimationUtils.loadAnimation(getBaseContext(),R.anim.antirotate);
-        final Animation animation_3 = AnimationUtils.loadAnimation(getBaseContext(),R.anim.abc_fade_out);
+        final Animation animation_1 = AnimationUtils.loadAnimation(getBaseContext(), R.anim.rotate);
+        final Animation animation_2 = AnimationUtils.loadAnimation(getBaseContext(), R.anim.antirotate);
 
         imageView.startAnimation(animation_2);
         animation_2.setAnimationListener(new Animation.AnimationListener() {
@@ -47,10 +47,14 @@ public class SplashScreen extends Activity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                imageView.startAnimation(animation_3);
-                finish();
-                Intent i = new Intent(getBaseContext(),MainActivity.class);
-                startActivity(i);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent i = new Intent(getBaseContext(), MainActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+                }, 0);
             }
 
             @Override

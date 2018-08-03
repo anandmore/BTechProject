@@ -19,9 +19,9 @@ import com.btech.project.technofeed.model.Constants;
 
 public class AboutActivity extends AppCompatActivity {
 
+    public String URL;
     private Typeface montserrat_regular;
     private Typeface montserrat_semiBold;
-    public String URL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +88,7 @@ public class AboutActivity extends AppCompatActivity {
         cardViewInfo1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                URL="https://anandmore.github.io";
+                URL = "https://anandmore.github.io";
                 openWebViewActivity();
             }
         });
@@ -96,7 +96,7 @@ public class AboutActivity extends AppCompatActivity {
         cardViewInfo2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                URL="https://www.facebook.com/ritesh.bawle";
+                URL = "https://www.facebook.com/ritesh.bawle";
                 openWebViewActivity();
             }
         });
@@ -104,7 +104,7 @@ public class AboutActivity extends AppCompatActivity {
         cardViewInfo3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                URL="https://www.facebook.com/anan.sethi";
+                URL = "https://www.facebook.com/anan.sethi";
                 openWebViewActivity();
             }
         });
@@ -112,7 +112,7 @@ public class AboutActivity extends AppCompatActivity {
         cardViewLibrary1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                URL="https://github.com/mikepenz/MaterialDrawer";
+                URL = "https://github.com/mikepenz/MaterialDrawer";
                 openWebViewActivity();
             }
         });
@@ -120,7 +120,7 @@ public class AboutActivity extends AppCompatActivity {
         cardViewLibrary2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                URL="https://github.com/square/retrofit";
+                URL = "https://github.com/square/retrofit";
                 openWebViewActivity();
             }
         });
@@ -128,7 +128,7 @@ public class AboutActivity extends AppCompatActivity {
         cardViewLibrary3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                URL="https://github.com/square/okhttp";
+                URL = "https://github.com/square/okhttp";
                 openWebViewActivity();
             }
         });
@@ -136,7 +136,7 @@ public class AboutActivity extends AppCompatActivity {
         cardViewLibrary4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                URL="https://github.com/bumptech/glide";
+                URL = "https://github.com/bumptech/glide";
                 openWebViewActivity();
             }
         });

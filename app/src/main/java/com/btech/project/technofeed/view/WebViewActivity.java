@@ -126,15 +126,6 @@ public class WebViewActivity extends AppCompatActivity {
 
     }
 
-    private class MyWebChromeClient extends WebChromeClient {
-        Context context;
-
-        public MyWebChromeClient(Context context) {
-            super();
-            this.context = context;
-        }
-    }
-
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -166,11 +157,19 @@ public class WebViewActivity extends AppCompatActivity {
         super.onResume();
     }
 
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.pull_in_left, R.anim.push_out_right);
+    }
+
+    private class MyWebChromeClient extends WebChromeClient {
+        Context context;
+
+        public MyWebChromeClient(Context context) {
+            super();
+            this.context = context;
+        }
     }
 
 }

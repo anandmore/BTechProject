@@ -49,7 +49,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
         String title = articles.get(position).getTitle();
         if (title.endsWith("- Times of India")) {
             title = title.replace("- Times of India", "");
-        } else if(title.endsWith(" - Firstpost")) {
+        } else if (title.endsWith(" - Firstpost")) {
             title = title.replace(" - Firstpost", "");
         }
 
@@ -75,12 +75,11 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        AssetManager assetManager = mContext.getApplicationContext().getAssets();
+        Typeface montserrat_regular = Typeface.createFromAsset(assetManager, "fonts/Montserrat-Regular.ttf");
         private TextView tv_card_main_title;
         private ImageView img_card_main;
         private CardView cardView;
-
-        AssetManager assetManager = mContext.getApplicationContext().getAssets();
-        Typeface montserrat_regular = Typeface.createFromAsset(assetManager, "fonts/Montserrat-Regular.ttf");
 
         public ViewHolder(View view) {
             super(view);
@@ -96,7 +95,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
             String headLine = articles.get(getAdapterPosition()).getTitle();
             if (headLine.endsWith(" - Times of India")) {
                 headLine = headLine.replace(" - Times of India", "");
-            } else if(headLine.endsWith(" - Firstpost")) {
+            } else if (headLine.endsWith(" - Firstpost")) {
                 headLine = headLine.replace(" - Firstpost", "");
             }
             String description = articles.get(getAdapterPosition()).getDescription();

@@ -15,13 +15,13 @@ public interface ApiInterface {
 
     @GET("top-headlines")
     Call<NewsResponse> getTopHeadlines(@Query("country") String country,
-                                    @Query("category") String category,
-                                    @Query("apiKey") String apiKey);
+                                       @Query("category") String category,
+                                       @Query("apiKey") String apiKey);
 
     @GET("everything")
     Call<NewsResponse> getSearchResults(@Query("q") String query,
-                                           @Query("sortBy") String sortBy,
-                                           @Query("language") String language,
-                                           @Query("apiKey") String apiKey);
+                                        @Query("sortBy") String sortBy,
+                                        @Query("language") String language,
+                                        @Query("apiKey") String apiKey);
 
 }

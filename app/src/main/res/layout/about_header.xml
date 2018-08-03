@@ -11,8 +11,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_margin="16dp"
+        android:contentDescription="@string/technofeed_logo"
         android:scaleType="fitCenter"
-        android:src="@raw/ic_background"
-        android:contentDescription="@string/technofeed_logo" />
+        android:src="@raw/ic_background" />
 
 </LinearLayout>

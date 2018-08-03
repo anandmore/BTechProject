@@ -15,9 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+        <activity
+            android:name=".view.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".view.ArticleActivity"
             android:label="@string/title_activity_article"
@@ -45,7 +45,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.btech.project.technofeed.view.ArticleActivity" />
         </activity>
-        <activity android:name=".view.SearchActivity"
+        <activity
+            android:name=".view.SearchActivity"
             android:parentActivityName=".view.MainActivity"
             android:theme="@style/AppThemeSearch"
             tools:targetApi="jelly_bean">

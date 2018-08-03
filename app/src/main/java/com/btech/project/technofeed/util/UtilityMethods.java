@@ -9,7 +9,7 @@ public class UtilityMethods {
     public static boolean isNetworkAvailable() {
 
         ConnectivityManager connectivityManager = (ConnectivityManager) TechnoFeedApplication.getTechnoFeedApplicationInstance()
-                        .getSystemService(Context.CONNECTIVITY_SERVICE);
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
 
         return connectivityManager.getActiveNetworkInfo() != null
                 && connectivityManager.getActiveNetworkInfo().isConnectedOrConnecting();
