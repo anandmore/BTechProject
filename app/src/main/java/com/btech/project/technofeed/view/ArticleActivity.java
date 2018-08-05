@@ -19,6 +19,9 @@ import com.btech.project.technofeed.R;
 import com.btech.project.technofeed.model.Constants;
 import com.btech.project.technofeed.util.UtilityMethods;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 
 public class ArticleActivity extends AppCompatActivity {
@@ -84,11 +87,15 @@ public class ArticleActivity extends AppCompatActivity {
         content_Description.setTypeface(montserrat_regular);
 
         ImageView collapsingImage = findViewById(R.id.collapsingImage);
+
+        RequestOptions options=new RequestOptions()
+                .centerCrop()
+                .error(R.mipmap.ic_placeholder);
+
         Glide.with(this)
                 .load(imgURL)
-                .centerCrop()
-                .error(R.mipmap.ic_placeholder)
-                .crossFade()
+                .apply(options)
+                .transition(withCrossFade())
                 .into(collapsingImage);
     }
 

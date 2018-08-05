@@ -20,6 +20,7 @@ import com.btech.project.technofeed.model.ArticleStructure;
 import com.btech.project.technofeed.model.Constants;
 import com.btech.project.technofeed.view.ArticleActivity;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
@@ -52,11 +53,14 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
         holder.tv_card_main_title.setText(title);
 
+        RequestOptions options=new RequestOptions()
+                .centerCrop()
+                .error(R.mipmap.ic_placeholder);
+
         Glide.with(mContext)
                 .load(articles.get(position).getUrlToImage())
                 .thumbnail(0.1f)
-                .centerCrop()
-                .error(R.mipmap.ic_placeholder)
+                .apply(options)
                 .into(holder.img_card_main);
 
         if (position > lastPosition) {
