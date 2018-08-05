@@ -5,6 +5,7 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 
 import com.btech.project.technofeed.R;
 import com.btech.project.technofeed.model.Constants;
+import com.btech.project.technofeed.util.UtilityMethods;
 
 public class WebViewActivity extends AppCompatActivity {
 
@@ -48,6 +50,11 @@ public class WebViewActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             webView.loadUrl(url);
             initWebView();
+        }
+
+        if (!UtilityMethods.isNetworkAvailable()) {
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.web_view), "No internet connection", Snackbar.LENGTH_LONG);
+            snackbar.show();
         }
     }
 

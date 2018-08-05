@@ -4,6 +4,7 @@ import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,6 +29,7 @@ import com.btech.project.technofeed.network.ApiClient;
 import com.btech.project.technofeed.network.ApiInterface;
 import com.btech.project.technofeed.network.interceptors.OfflineResponseCacheInterceptor;
 import com.btech.project.technofeed.network.interceptors.ResponseCacheInterceptor;
+import com.btech.project.technofeed.util.UtilityMethods;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -77,6 +79,11 @@ public class SearchActivity extends AppCompatActivity {
 
         mSwipeRefreshSearch.setEnabled(false);
         mSwipeRefreshSearch.setColorSchemeResources(R.color.colorPrimary);
+
+        if (!UtilityMethods.isNetworkAvailable()) {
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.root_layout), "No internet connection", Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
     }
 
     private void createToolbar() {
