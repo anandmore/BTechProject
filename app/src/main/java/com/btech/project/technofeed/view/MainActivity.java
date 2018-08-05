@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private static final int TIME_INTERVAL = 2000;
     public String URL;
     public Boolean TOP;
-    private String[] SOURCE_ARRAY = {"engadget", "techcrunch", "techradar", "the-next-web", "the-verge"};
+    private String[] SOURCE_ARRAY = {"ars-technica", "crypto-coins-news", "engadget", "techcrunch", "techradar", "the-next-web", "the-verge"};
     private String SOURCE;
     private ArrayList<ArticleStructure> articleStructure = new ArrayList<>();
     private DataAdapter adapter;
@@ -112,23 +112,27 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 .withIcon(R.drawable.ic_whatshot).withTypeface(montserrat_regular);
         PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("NEWS SOURCE")
                 .withTypeface(montserrat_regular).withSelectable(false).withTextColor(getColor(R.color.menuText));
-        PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName("Engadget")
+        PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName("Ars Technica")
+                .withIcon(R.mipmap.ic_arstechnica).withTypeface(montserrat_regular);
+        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName("Crypto Coins News")
+                .withIcon(R.mipmap.ic_ccnews).withTypeface(montserrat_regular);
+        PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(4).withName("Engadget")
                 .withIcon(R.mipmap.ic_engadget).withTypeface(montserrat_regular);
-        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName("TechCrunch")
+        PrimaryDrawerItem item5 = new PrimaryDrawerItem().withIdentifier(5).withName("TechCrunch")
                 .withIcon(R.mipmap.ic_techcrunch).withTypeface(montserrat_regular);
-        PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(4).withName("TechRadar")
+        PrimaryDrawerItem item6 = new PrimaryDrawerItem().withIdentifier(6).withName("TechRadar")
                 .withIcon(R.mipmap.ic_techradar).withTypeface(montserrat_regular);
-        PrimaryDrawerItem item5 = new PrimaryDrawerItem().withIdentifier(5).withName("The Next Web")
+        PrimaryDrawerItem item7 = new PrimaryDrawerItem().withIdentifier(7).withName("The Next Web")
                 .withIcon(R.mipmap.ic_thenextweb).withTypeface(montserrat_regular);
-        PrimaryDrawerItem item6 = new PrimaryDrawerItem().withIdentifier(6).withName("The Verge")
+        PrimaryDrawerItem item8 = new PrimaryDrawerItem().withIdentifier(8).withName("The Verge")
                 .withIcon(R.mipmap.ic_theverge).withTypeface(montserrat_regular);
-        SecondaryDrawerItem item7 = new SecondaryDrawerItem().withIdentifier(7).withName("MORE INFO")
+        SecondaryDrawerItem item9 = new SecondaryDrawerItem().withIdentifier(9).withName("MORE INFO")
                 .withTypeface(montserrat_regular).withSelectable(false).withTextColor(getColor(R.color.menuText));
-        SecondaryDrawerItem item8 = new SecondaryDrawerItem().withIdentifier(8).withName("About the app")
+        SecondaryDrawerItem item10 = new SecondaryDrawerItem().withIdentifier(10).withName("About the app")
                 .withIcon(R.drawable.ic_info).withTypeface(montserrat_regular);
-        SecondaryDrawerItem item9 = new SecondaryDrawerItem().withIdentifier(9).withName("Open Source")
+        SecondaryDrawerItem item11 = new SecondaryDrawerItem().withIdentifier(11).withName("Open Source")
                 .withIcon(R.drawable.ic_code).withTypeface(montserrat_regular);
-        SecondaryDrawerItem item10 = new SecondaryDrawerItem().withIdentifier(10).withName("Powered by newsapi.org")
+        SecondaryDrawerItem item12 = new SecondaryDrawerItem().withIdentifier(12).withName("Powered by newsapi.org")
                 .withIcon(R.drawable.ic_power).withTypeface(montserrat_regular);
 
         accountHeader = new AccountHeaderBuilder()
@@ -143,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 .withToolbar(toolbar)
                 .withSelectedItem(0)
                 .addDrawerItems(item0, item1, item2, item3, item4, item5, item6, item7, item8, item9,
-                        item10)
+                        item10, item11, item12)
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
@@ -185,14 +189,26 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                                 onLoadingSwipeRefreshLayout();
                                 mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
                                 break;
+                            case 7:
+                                SOURCE = SOURCE_ARRAY[5];
+                                TOP = false;
+                                onLoadingSwipeRefreshLayout();
+                                mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
+                                break;
                             case 8:
+                                SOURCE = SOURCE_ARRAY[6];
+                                TOP = false;
+                                onLoadingSwipeRefreshLayout();
+                                mTitle.setText(((Nameable) drawerItem).getName().getText(MainActivity.this));
+                                break;
+                            case 10:
                                 openAboutActivity();
                                 break;
-                            case 9:
+                            case 11:
                                 URL = "https://github.com/anandmore/BTechProject";
                                 openWebViewActivity();
                                 break;
-                            case 10:
+                            case 12:
                                 URL = "https://newsapi.org/";
                                 openWebViewActivity();
                                 break;
