@@ -1,4 +1,4 @@
-package com.btech.project.technofeed;
+package com.btech.project.technofeed.view;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.btech.project.technofeed.R;
 import com.btech.project.technofeed.util.UtilityMethods;
 import com.btech.project.technofeed.view.MainActivity;
 
