@@ -11,7 +11,6 @@ import android.widget.ImageView;
 
 import com.btech.project.technofeed.R;
 import com.btech.project.technofeed.util.UtilityMethods;
-import com.btech.project.technofeed.view.MainActivity;
 
 public class SplashScreen extends Activity {
 

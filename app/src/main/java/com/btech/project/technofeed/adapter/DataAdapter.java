@@ -53,7 +53,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
         holder.tv_card_main_title.setText(title);
 
-        RequestOptions options=new RequestOptions()
+        RequestOptions options = new RequestOptions()
                 .centerCrop()
                 .error(R.mipmap.ic_placeholder);
 

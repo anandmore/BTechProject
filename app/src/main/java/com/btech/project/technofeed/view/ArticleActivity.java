@@ -88,7 +88,7 @@ public class ArticleActivity extends AppCompatActivity {
 
         ImageView collapsingImage = findViewById(R.id.collapsingImage);
 
-        RequestOptions options=new RequestOptions()
+        RequestOptions options = new RequestOptions()
                 .centerCrop()
                 .error(R.mipmap.ic_placeholder);
 
