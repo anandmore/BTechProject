@@ -39,7 +39,7 @@ public class AboutActivity extends AppCompatActivity {
         createInfoTextView();
         createLibraryCardViews();
 
-        versionName= "v"+BuildConfig.VERSION_NAME;
+        versionName = "v" + BuildConfig.VERSION_NAME;
 
     }
 
