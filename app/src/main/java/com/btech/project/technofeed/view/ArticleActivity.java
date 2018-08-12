@@ -117,7 +117,7 @@ public class ArticleActivity extends AppCompatActivity {
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "Check out this news! Sent from TechnoFeed App :\n" + Uri.parse(URL));
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "Check out this news! Sent from TechnoFeed App :\n\n" + Uri.parse(URL) + "\n\nDownload TechnoFeed App : http://v.ht/tfdwnld");
                 startActivity(Intent.createChooser(shareIntent, "Share with"));
             }
         });
