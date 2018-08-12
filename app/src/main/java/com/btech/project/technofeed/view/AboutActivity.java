@@ -197,7 +197,7 @@ public class AboutActivity extends AppCompatActivity {
 
     protected void sendEmail() {
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-        emailIntent.setData(Uri.parse("mailto: anandmore1997.am@gmail.com@gmail.com"));
+        emailIntent.setData(Uri.parse("mailto: code_b1ooded@anandmore.gq@gmail.com"));
         startActivity(Intent.createChooser(emailIntent, "Send feedback"));
     }
 

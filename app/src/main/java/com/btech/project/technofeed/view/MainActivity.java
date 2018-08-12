@@ -373,7 +373,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     private void sendEmail() {
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-        emailIntent.setData(Uri.parse("mailto: anandmore1997.am@gmail.com"));
+        emailIntent.setData(Uri.parse("mailto: code_b1ooded@anandmore.gq"));
         startActivity(Intent.createChooser(emailIntent, "Send feedback"));
     }
 
