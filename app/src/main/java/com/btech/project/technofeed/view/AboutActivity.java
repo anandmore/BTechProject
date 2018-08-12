@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.btech.project.technofeed.BuildConfig;
 import com.btech.project.technofeed.R;
 import com.btech.project.technofeed.model.Constants;
 
@@ -22,6 +23,7 @@ public class AboutActivity extends AppCompatActivity {
     public String URL;
     private Typeface montserrat_regular;
     private Typeface montserrat_semiBold;
+    private String versionName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,8 @@ public class AboutActivity extends AppCompatActivity {
 
         createInfoTextView();
         createLibraryCardViews();
+
+        versionName= "v"+BuildConfig.VERSION_NAME;
 
     }
 
@@ -175,7 +179,7 @@ public class AboutActivity extends AppCompatActivity {
                 if (scrollRange + verticalOffset == 0) {
                     toolbarTitle.setVisibility(View.VISIBLE);
                     toolbarTitle.setTypeface(montserrat_regular);
-                    toolbarTitle.setText("About");
+                    toolbarTitle.setText(versionName);
                     isShow = true;
                 } else if (isShow) {
                     toolbarTitle.setVisibility(View.GONE);
