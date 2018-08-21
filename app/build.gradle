@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 ext.android_support_version = '27.1.1'
 ext.material_drawer_version = '6.0.9@aar'
@@ -7,6 +8,7 @@ ext.okhttp3_version = '3.11.0'
 ext.glide_version = '4.7.1'
 ext.junit_version = '4.12'
 ext.multidex_version = '1.0.3'
+ext.firebase_version = '16.0.0'
 
 android {
     compileSdkVersion 27
@@ -34,6 +36,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -54,4 +57,5 @@ dependencies {
     testImplementation "junit:junit:$junit_version"
     implementation "com.android.support:multidex:$multidex_version"
     implementation "com.android.support:design:$android_support_version"
+    implementation "com.google.firebase:firebase-core:$firebase_version"
 }
