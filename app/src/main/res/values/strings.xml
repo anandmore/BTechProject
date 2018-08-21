@@ -2,7 +2,7 @@
     <string name="app_name">TechnoFeed</string>
     <string name="title_activity_article">TechnoFeed</string>
     <string name="iv_card_content_description_image">Image of the news response</string>
-    <string name="collasping_image">Collasping Image</string>
+    <string name="collasping_image">Collapsing Image</string>
     <string name="tv_made_with_love_by">Made with &#9829; by</string>
     <string name="iv_card_my_info">My Photo</string>
     <string name="tv_libraries_used">Libraries Used</string>
@@ -21,4 +21,8 @@
     <string name="glide">Glide</string>
     <string name="bumptech">Bumptech</string>
     <string name="read_the_full_article">Read the full article</string>
+    <string name="search_label">Search</string>
+    <string name="browse_label">Browse</string>
+    <string name="about_label">About</string>
+    <string name="disabled_message">Shortcut isn\'t supported</string>
 </resources>
