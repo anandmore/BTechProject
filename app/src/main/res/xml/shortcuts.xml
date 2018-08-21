@@ -1,41 +1,41 @@
 <shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
     <shortcut
-        android:shortcutId="search"
         android:enabled="true"
         android:icon="@drawable/ic_search_black"
-        android:shortcutShortLabel="@string/search_label"
+        android:shortcutDisabledMessage="@string/disabled_message"
+        android:shortcutId="search"
         android:shortcutLongLabel="@string/search_label"
-        android:shortcutDisabledMessage="@string/disabled_message">
+        android:shortcutShortLabel="@string/search_label">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="com.btech.project.technofeed"
-            android:targetClass="com.btech.project.technofeed.view.SearchActivity" />
+            android:targetClass="com.btech.project.technofeed.view.SearchActivity"
+            android:targetPackage="com.btech.project.technofeed" />
         <categories android:name="android.shortcut.conversation" />
     </shortcut>
     <shortcut
-        android:shortcutId="browse"
         android:enabled="true"
         android:icon="@drawable/ic_whatshot_black"
-        android:shortcutShortLabel="@string/browse_label"
+        android:shortcutDisabledMessage="@string/disabled_message"
+        android:shortcutId="browse"
         android:shortcutLongLabel="@string/browse_label"
-        android:shortcutDisabledMessage="@string/disabled_message">
+        android:shortcutShortLabel="@string/browse_label">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="com.btech.project.technofeed"
-            android:targetClass="com.btech.project.technofeed.view.MainActivity" />
+            android:targetClass="com.btech.project.technofeed.view.MainActivity"
+            android:targetPackage="com.btech.project.technofeed" />
         <categories android:name="android.shortcut.conversation" />
     </shortcut>
     <shortcut
-        android:shortcutId="about"
         android:enabled="true"
         android:icon="@drawable/ic_info_black"
-        android:shortcutShortLabel="@string/about_label"
+        android:shortcutDisabledMessage="@string/disabled_message"
+        android:shortcutId="about"
         android:shortcutLongLabel="@string/about_label"
-        android:shortcutDisabledMessage="@string/disabled_message">
+        android:shortcutShortLabel="@string/about_label">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetPackage="com.btech.project.technofeed"
-            android:targetClass="com.btech.project.technofeed.view.AboutActivity" />
+            android:targetClass="com.btech.project.technofeed.view.AboutActivity"
+            android:targetPackage="com.btech.project.technofeed" />
         <categories android:name="android.shortcut.conversation" />
     </shortcut>
 </shortcuts>
