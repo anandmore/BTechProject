@@ -1,4 +1,5 @@
 package com.btech.project.technofeed.view;
+
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import com.btech.project.technofeed.R;
 import com.btech.project.technofeed.TechnoFeedApplication;
 import com.btech.project.technofeed.adapter.DataAdapter;
@@ -28,15 +30,18 @@ import com.btech.project.technofeed.network.ApiInterface;
 import com.btech.project.technofeed.network.interceptors.OfflineResponseCacheInterceptor;
 import com.btech.project.technofeed.network.interceptors.ResponseCacheInterceptor;
 import com.btech.project.technofeed.util.UtilityMethods;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
+
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 public class SearchActivity extends AppCompatActivity {
     private EditText mEdtSearch;
     private TextView mTxvNoResultsFound;
@@ -45,6 +50,7 @@ public class SearchActivity extends AppCompatActivity {
     private DataAdapter adapter;
     private Typeface montserrat_regular;
     private ArrayList<ArticleStructure> articleStructure = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +79,7 @@ public class SearchActivity extends AppCompatActivity {
             snackbar.show();
         }
     }
+
     private void createToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar_search);
         setSupportActionBar(toolbar);
@@ -84,11 +91,11 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                SearchActivity.this.overridePendingTransition(R.anim.pull_in_left, R.anim.push_out_right);
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
+
     private void initViews() {
         mEdtSearch = findViewById(R.id.editText_search);
         mEdtSearch.setTypeface(montserrat_regular);
@@ -97,6 +104,7 @@ public class SearchActivity extends AppCompatActivity {
         mTxvNoResultsFound = findViewById(R.id.tv_no_results);
         mRecyclerViewSearch.setLayoutManager(new LinearLayoutManager(SearchActivity.this));
     }
+
     private void searchEverything(final String search) {
         mSwipeRefreshSearch.setEnabled(true);
         mSwipeRefreshSearch.setRefreshing(true);
@@ -138,6 +146,7 @@ public class SearchActivity extends AppCompatActivity {
                     }
                 }
             }
+
             @Override
             public void onFailure(@NonNull Call<NewsResponse> call, @NonNull Throwable t) {
                 mSwipeRefreshSearch.setRefreshing(false);
@@ -145,11 +154,13 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_cancel:
@@ -164,12 +175,9 @@ public class SearchActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    private void cancelSearch() {
-        onBackPressed();
-    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.pull_in_left, R.anim.push_out_right);
     }
 }

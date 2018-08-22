@@ -19,7 +19,7 @@
             android:id="@+id/toolbar_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorTheme"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:theme="@style/ThemeOverlay.AppCompat.Light">
 
@@ -27,14 +27,14 @@
                 android:id="@+id/editText_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
+                android:background="@color/colorTransparent"
                 android:hint="Search for eg: 'Android'"
                 android:imeOptions="actionDone"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:textColor="@color/menuText"
-                android:textColorHint="@color/hintText"
-                android:textCursorDrawable="@color/menuText"
+                android:textColor="@color/colorSecondaryText"
+                android:textColorHint="@color/colorSecondaryHintText"
+                android:textCursorDrawable="@color/colorSecondaryText"
                 android:textSize="18sp" />
 
         </android.support.v7.widget.Toolbar>

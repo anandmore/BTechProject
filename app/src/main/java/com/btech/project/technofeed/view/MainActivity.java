@@ -1,7 +1,9 @@
 package com.btech.project.technofeed.view;
+
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -16,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.btech.project.technofeed.R;
 import com.btech.project.technofeed.TechnoFeedApplication;
 import com.btech.project.technofeed.adapter.DataAdapter;
@@ -28,18 +31,17 @@ import com.btech.project.technofeed.network.interceptors.OfflineResponseCacheInt
 import com.btech.project.technofeed.network.interceptors.ResponseCacheInterceptor;
 import com.btech.project.technofeed.util.UtilityMethods;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.mikepenz.materialdrawer.AccountHeader;
-import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
+
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -47,6 +49,7 @@ import okhttp3.logging.HttpLoggingInterceptor.Level;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     private static final int TIME_INTERVAL = 2000;
     public String URL;
@@ -57,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private DataAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private Drawer result;
-    private AccountHeader accountHeader;
     private Toolbar toolbar;
     private RecyclerView recyclerView;
     private Parcelable listState;
@@ -65,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private TextView mTitle;
     private long mBackPressed;
     private FirebaseAuth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         createDrawer(savedInstanceState, toolbar, montserrat_regular);
         auth = FirebaseAuth.getInstance();
     }
+
     private void createToolbar() {
         toolbar = findViewById(R.id.toolbar_main_activity);
         setSupportActionBar(toolbar);
@@ -89,52 +93,50 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         mTitle = findViewById(R.id.toolbar_title);
         mTitle.setTypeface(montserrat_regular);
     }
+
     private void createRecyclerView() {
         recyclerView = findViewById(R.id.card_recycler_view);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryText);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
     }
+
     private void createDrawer(Bundle savedInstanceState, final Toolbar toolbar, Typeface montserrat_regular) {
         PrimaryDrawerItem item0 = new PrimaryDrawerItem().withIdentifier(0).withName("Top Headlines")
-                .withIcon(R.drawable.ic_whatshot).withTypeface(montserrat_regular);
+                .withIcon(R.drawable.ic_whatshot).withTypeface(montserrat_regular).withSelectedTextColor(getColor(R.color.colorTheme));
         PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("NEWS SOURCE")
-                .withTypeface(montserrat_regular).withSelectable(false).withTextColor(getColor(R.color.menuText));
+                .withTypeface(montserrat_regular).withSelectable(false).withTextColor(getColor(R.color.colorPrimaryText));
         PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName("Ars Technica")
-                .withIcon(R.mipmap.ic_arstechnica).withTypeface(montserrat_regular);
+                .withIcon(R.mipmap.ic_arstechnica).withTypeface(montserrat_regular).withSelectedTextColor(getColor(R.color.colorTheme));
         PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName("Crypto Coins News")
-                .withIcon(R.mipmap.ic_ccnews).withTypeface(montserrat_regular);
+                .withIcon(R.mipmap.ic_ccnews).withTypeface(montserrat_regular).withSelectedTextColor(getColor(R.color.colorTheme));
         PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(4).withName("Engadget")
-                .withIcon(R.mipmap.ic_engadget).withTypeface(montserrat_regular);
+                .withIcon(R.mipmap.ic_engadget).withTypeface(montserrat_regular).withSelectedTextColor(getColor(R.color.colorTheme));
         PrimaryDrawerItem item5 = new PrimaryDrawerItem().withIdentifier(5).withName("TechCrunch")
-                .withIcon(R.mipmap.ic_techcrunch).withTypeface(montserrat_regular);
+                .withIcon(R.mipmap.ic_techcrunch).withTypeface(montserrat_regular).withSelectedTextColor(getColor(R.color.colorTheme));
         PrimaryDrawerItem item6 = new PrimaryDrawerItem().withIdentifier(6).withName("TechRadar")
-                .withIcon(R.mipmap.ic_techradar).withTypeface(montserrat_regular);
+                .withIcon(R.mipmap.ic_techradar).withTypeface(montserrat_regular).withSelectedTextColor(getColor(R.color.colorTheme));
         PrimaryDrawerItem item7 = new PrimaryDrawerItem().withIdentifier(7).withName("The Next Web")
-                .withIcon(R.mipmap.ic_thenextweb).withTypeface(montserrat_regular);
+                .withIcon(R.mipmap.ic_thenextweb).withTypeface(montserrat_regular).withSelectedTextColor(getColor(R.color.colorTheme));
         PrimaryDrawerItem item8 = new PrimaryDrawerItem().withIdentifier(8).withName("The Verge")
-                .withIcon(R.mipmap.ic_theverge).withTypeface(montserrat_regular);
+                .withIcon(R.mipmap.ic_theverge).withTypeface(montserrat_regular).withSelectedTextColor(getColor(R.color.colorTheme));
         SecondaryDrawerItem item9 = new SecondaryDrawerItem().withIdentifier(9).withName("MORE INFO")
-                .withTypeface(montserrat_regular).withSelectable(false).withTextColor(getColor(R.color.menuText));
+                .withTypeface(montserrat_regular).withSelectable(false).withTextColor(getColor(R.color.colorPrimaryText));
         SecondaryDrawerItem item10 = new SecondaryDrawerItem().withIdentifier(10).withName("About the app")
-                .withIcon(R.drawable.ic_info).withTypeface(montserrat_regular);
+                .withIcon(R.drawable.ic_info).withTypeface(montserrat_regular).withSelectedTextColor(getColor(R.color.colorTheme));
         SecondaryDrawerItem item11 = new SecondaryDrawerItem().withIdentifier(11).withName("Open Source")
-                .withIcon(R.drawable.ic_code).withTypeface(montserrat_regular);
-        SecondaryDrawerItem item12 = new SecondaryDrawerItem().withIdentifier(12).withName("Powered by newsapi.org")
-                .withIcon(R.drawable.ic_power).withTypeface(montserrat_regular);
-        accountHeader = new AccountHeaderBuilder()
-                .withActivity(this)
-                .withHeaderBackground(R.raw.ic_background)
-                .withSavedInstance(savedInstanceState)
-                .build();
+                .withIcon(R.drawable.ic_code).withTypeface(montserrat_regular).withSelectedTextColor(getColor(R.color.colorTheme));
+        SecondaryDrawerItem item12 = new SecondaryDrawerItem().withIdentifier(12).withName("Send feedback")
+                .withIcon(R.drawable.ic_mail).withTypeface(montserrat_regular).withSelectedTextColor(getColor(R.color.colorTheme));
+        SecondaryDrawerItem item13 = new SecondaryDrawerItem().withIdentifier(13).withName("Powered by newsapi.org")
+                .withIcon(R.drawable.ic_power).withTypeface(montserrat_regular).withSelectedTextColor(getColor(R.color.colorTheme));
         result = new DrawerBuilder()
-                .withAccountHeader(accountHeader)
                 .withActivity(this)
                 .withToolbar(toolbar)
                 .withSelectedItem(0)
                 .addDrawerItems(item0, item1, item2, item3, item4, item5, item6, item7, item8, item9,
-                        item10, item11, item12)
+                        item10, item11, item12, item13)
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
@@ -196,6 +198,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                                 openWebViewActivity();
                                 break;
                             case 12:
+                                sendEmail();
+                                break;
+                            case 13:
                                 URL = "https://newsapi.org/";
                                 openWebViewActivity();
                                 break;
@@ -208,6 +213,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 .withSavedInstance(savedInstanceState)
                 .build();
     }
+
     private void loadTopJSON() {
         swipeRefreshLayout.setRefreshing(true);
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
@@ -236,12 +242,14 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     swipeRefreshLayout.setRefreshing(false);
                 }
             }
+
             @Override
             public void onFailure(@NonNull Call<NewsResponse> call, @NonNull Throwable t) {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
+
     private void loadJSON() {
         swipeRefreshLayout.setRefreshing(true);
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
@@ -268,12 +276,14 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     swipeRefreshLayout.setRefreshing(false);
                 }
             }
+
             @Override
             public void onFailure(@NonNull Call<NewsResponse> call, @NonNull Throwable t) {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
+
     @Override
     public void onRefresh() {
         if (TOP == true) {
@@ -282,6 +292,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             loadJSON();
         }
     }
+
     private void onLoadingSwipeRefreshLayout() {
         if (!UtilityMethods.isNetworkAvailable()) {
             Snackbar snackbar = Snackbar.make(findViewById(R.id.main_activity), "No internet connection", Snackbar.LENGTH_LONG);
@@ -300,11 +311,13 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 }
         );
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_search:
@@ -319,16 +332,17 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void openAboutActivity() {
         Intent aboutIntent = new Intent(this, AboutActivity.class);
         startActivity(aboutIntent);
-        this.overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
     }
+
     private void openSearchActivity() {
         Intent searchIntent = new Intent(this, SearchActivity.class);
         startActivity(searchIntent);
-        this.overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
     }
+
     public void onBackPressed() {
         if (result.isDrawerOpen()) {
             result.closeDrawer();
@@ -343,16 +357,17 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             mBackPressed = System.currentTimeMillis();
         }
     }
+
     @Override
     protected void onSaveInstanceState(Bundle bundle) {
         bundle = result.saveInstanceState(bundle);
-        bundle = accountHeader.saveInstanceState(bundle);
         super.onSaveInstanceState(bundle);
         listState = recyclerView.getLayoutManager().onSaveInstanceState();
         bundle.putParcelable(Constants.RECYCLER_STATE_KEY, listState);
         bundle.putString(Constants.SOURCE, SOURCE);
         bundle.putString(Constants.TITLE_STATE_KEY, mTitle.getText().toString());
     }
+
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
@@ -364,6 +379,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             createDrawer(savedInstanceState, toolbar, montserrat_regular);
         }
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -371,19 +387,26 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             recyclerView.getLayoutManager().onRestoreInstanceState(listState);
         }
     }
+
     private void openWebViewActivity() {
         Intent browserIntent = new Intent(MainActivity.this, WebViewActivity.class);
         browserIntent.putExtra(Constants.INTENT_URL, URL);
         startActivity(browserIntent);
-        this.overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
     }
+
     public void signOut() {
         auth.signOut();
     }
+
     private void openLoginActivity() {
         Intent loginIntent = new Intent(this, LoginActivity.class);
         startActivity(loginIntent);
-        this.overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
         finish();
+    }
+
+    protected void sendEmail() {
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+        emailIntent.setData(Uri.parse("mailto: code_b1ooded@anandmore.gq"));
+        startActivity(Intent.createChooser(emailIntent, "Send feedback"));
     }
 }

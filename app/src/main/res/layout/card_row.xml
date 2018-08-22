@@ -11,13 +11,14 @@
     android:layout_marginTop="@dimen/card_layout_margin"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?attr/selectableItemBackgroundBorderless"
-    card_view:cardBackgroundColor="@color/colorCardView"
+    card_view:cardBackgroundColor="@color/colorPrimary"
     card_view:cardCornerRadius="@dimen/card_layout_corner_radius"
     card_view:cardElevation="@dimen/card_layout_elevation">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ImageView
             android:id="@+id/img_card_main"
             android:layout_width="match_parent"
@@ -26,13 +27,14 @@
             android:layout_alignParentRight="true"
             android:contentDescription="@string/iv_card_content_description_image"
             android:scaleType="centerCrop" />
+
         <TextView
             android:id="@+id/tv_card_main_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/img_card_main"
             android:layout_margin="@dimen/tv_card_layout_margin"
-            android:textColor="@color/cardText"
+            android:textColor="@color/colorPrimaryText"
             android:textSize="@dimen/tv_card_text_size"
             android:textStyle="bold"
             tools:text="HEADLINE TITLE" />

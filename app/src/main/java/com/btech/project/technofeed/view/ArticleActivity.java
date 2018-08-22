@@ -1,4 +1,5 @@
 package com.btech.project.technofeed.view;
+
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
@@ -13,16 +14,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.btech.project.technofeed.R;
 import com.btech.project.technofeed.model.Constants;
 import com.btech.project.technofeed.util.UtilityMethods;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
+
 public class ArticleActivity extends AppCompatActivity {
     private String URL;
     private Typeface montserrat_regular;
     private Typeface montserrat_semiBold;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,11 +42,13 @@ public class ArticleActivity extends AppCompatActivity {
             snackbar.show();
         }
     }
+
     private void assetManager() {
         AssetManager assetManager = this.getApplicationContext().getAssets();
         montserrat_regular = Typeface.createFromAsset(assetManager, "fonts/Montserrat-Regular.ttf");
         montserrat_semiBold = Typeface.createFromAsset(assetManager, "fonts/Montserrat-SemiBold.ttf");
     }
+
     private void buttonLinktoFullArticle(Typeface montserrat_regular) {
         Button linkToFullArticle = findViewById(R.id.article_button);
         linkToFullArticle.setTypeface(montserrat_regular);
@@ -52,12 +59,13 @@ public class ArticleActivity extends AppCompatActivity {
             }
         });
     }
+
     private void openWebViewActivity() {
         Intent browserIntent = new Intent(ArticleActivity.this, WebViewActivity.class);
         browserIntent.putExtra(Constants.INTENT_URL, URL);
         startActivity(browserIntent);
-        this.overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
     }
+
     private void receiveFromDataAdapter(Typeface montserrat_regular, Typeface montserrat_semiBold) {
         String headLine = getIntent().getStringExtra(Constants.INTENT_HEADLINE);
         String description = getIntent().getStringExtra(Constants.INTENT_DESCRIPTION);
@@ -80,6 +88,7 @@ public class ArticleActivity extends AppCompatActivity {
                 .transition(withCrossFade())
                 .into(collapsingImage);
     }
+
     private void createToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar_article);
         setSupportActionBar(toolbar);
@@ -88,6 +97,7 @@ public class ArticleActivity extends AppCompatActivity {
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
     private void floatingButton() {
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +111,7 @@ public class ArticleActivity extends AppCompatActivity {
             }
         });
     }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -109,9 +120,9 @@ public class ArticleActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.pull_in_left, R.anim.push_out_right);
     }
 }

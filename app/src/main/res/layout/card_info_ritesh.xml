@@ -11,13 +11,14 @@
     android:layout_marginTop="@dimen/card_layout_margin"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?attr/selectableItemBackgroundBorderless"
-    card_view:cardBackgroundColor="@color/colorCardView"
+    card_view:cardBackgroundColor="@color/colorPrimary"
     card_view:cardCornerRadius="@dimen/card_layout_corner_radius"
     card_view:cardElevation="@dimen/card_layout_elevation">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp">
+
         <ImageView
             android:id="@+id/iv_card_info_ritesh"
             android:layout_width="60dp"
@@ -27,6 +28,7 @@
             android:contentDescription="@string/iv_card_my_info"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_ritesh" />
+
         <TextView
             android:id="@+id/tv_card_info_ritesh"
             android:layout_width="match_parent"
@@ -39,7 +41,7 @@
             android:layout_toRightOf="@id/iv_card_info_ritesh"
             android:gravity="center"
             android:text="@string/ritesh_bawale"
-            android:textColor="@color/cardText"
+            android:textColor="@color/colorPrimaryText"
             android:textSize="16sp"
             android:textStyle="normal" />
     </RelativeLayout>
