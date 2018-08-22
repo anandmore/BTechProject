@@ -75,7 +75,7 @@ public class SearchActivity extends AppCompatActivity {
         mSwipeRefreshSearch.setEnabled(false);
         mSwipeRefreshSearch.setColorSchemeResources(R.color.colorPrimary);
         if (!UtilityMethods.isNetworkAvailable()) {
-            Snackbar snackbar = Snackbar.make(findViewById(R.id.root_layout), "No internet connection", Snackbar.LENGTH_LONG);
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.root_layout), "No Internet Connection!", Snackbar.LENGTH_LONG);
             snackbar.show();
         }
     }
@@ -142,7 +142,7 @@ public class SearchActivity extends AppCompatActivity {
                         mSwipeRefreshSearch.setEnabled(false);
                         mTxvNoResultsFound.setVisibility(View.VISIBLE);
                         mRecyclerViewSearch.setVisibility(View.GONE);
-                        mTxvNoResultsFound.setText("No results found for \"" + search + "\" !");
+                        mTxvNoResultsFound.setText("No results found for \"" + search + "\".");
                     }
                 }
             }

@@ -76,11 +76,11 @@ public class LoginActivity extends AppCompatActivity {
                 String email = inputEmail.getText().toString();
                 final String password = inputPassword.getText().toString();
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), "Enter email address", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Enter Email Address!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(getApplicationContext(), "Enter password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Enter Password!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 progressBar.setVisibility(View.VISIBLE);
@@ -91,12 +91,12 @@ public class LoginActivity extends AppCompatActivity {
                                 progressBar.setVisibility(View.GONE);
                                 if (!task.isSuccessful()) {
                                     if (password.length() < 6) {
-                                        inputPassword.setError(getString(R.string.minimum_password));
+                                        inputPassword.setError("Password should have minimum 6 characters.");
                                     } else {
-                                        Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
+                                        Toast.makeText(LoginActivity.this, "Authentication Failed!", Toast.LENGTH_LONG).show();
                                     }
                                 } else {
-                                    Toast.makeText(LoginActivity.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, "Welcome Back!", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intent);
                                     finish();
@@ -106,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         if (!UtilityMethods.isNetworkAvailable()) {
-            Snackbar snackbar = Snackbar.make(findViewById(R.id.login_activity), "No internet connection", Snackbar.LENGTH_LONG);
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.login_activity), "No Internet Connection!", Snackbar.LENGTH_LONG);
             snackbar.show();
         }
     }
@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
             super.onBackPressed();
             return;
         } else {
-            Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getBaseContext(), "Press back again to exit.", Toast.LENGTH_SHORT).show();
         }
         mBackPressed = System.currentTimeMillis();
     }

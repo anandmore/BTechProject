@@ -38,7 +38,7 @@ public class ArticleActivity extends AppCompatActivity {
         receiveFromDataAdapter(montserrat_regular, montserrat_semiBold);
         buttonLinktoFullArticle(montserrat_regular);
         if (!UtilityMethods.isNetworkAvailable()) {
-            Snackbar snackbar = Snackbar.make(findViewById(R.id.article_content), "No internet connection", Snackbar.LENGTH_LONG);
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.article_content), "No Internet Connection!", Snackbar.LENGTH_LONG);
             snackbar.show();
         }
     }

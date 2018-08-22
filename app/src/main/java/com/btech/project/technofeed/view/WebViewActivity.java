@@ -46,7 +46,7 @@ public class WebViewActivity extends AppCompatActivity {
             initWebView();
         }
         if (!UtilityMethods.isNetworkAvailable()) {
-            Snackbar snackbar = Snackbar.make(findViewById(R.id.web_view), "No internet connection", Snackbar.LENGTH_LONG);
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.web_view), "No Internet Connection!", Snackbar.LENGTH_LONG);
             snackbar.show();
         }
     }

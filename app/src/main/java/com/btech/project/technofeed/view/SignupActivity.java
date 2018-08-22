@@ -69,15 +69,15 @@ public class SignupActivity extends AppCompatActivity {
                 String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), "Enter email address", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Enter Email Address!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(getApplicationContext(), "Enter password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Enter Password!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (password.length() < 6) {
-                    Toast.makeText(getApplicationContext(), "Password too short, enter minimum 6 characters", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Password should have minimum 6 characters.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 progressBar.setVisibility(View.VISIBLE);
@@ -87,9 +87,9 @@ public class SignupActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility(View.GONE);
                                 if (!task.isSuccessful()) {
-                                    Toast.makeText(SignupActivity.this, "Authentication failed", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignupActivity.this, "Authentication Failed!", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(SignupActivity.this, "Signed up successfully", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignupActivity.this, "Welcome Onboard!", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(SignupActivity.this, LoginActivity.class));
                                     finish();
                                 }
@@ -98,7 +98,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
         if (!UtilityMethods.isNetworkAvailable()) {
-            Snackbar snackbar = Snackbar.make(findViewById(R.id.signup_activity), "No internet connection", Snackbar.LENGTH_LONG);
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.signup_activity), "No Internet Connection!", Snackbar.LENGTH_LONG);
             snackbar.show();
         }
     }

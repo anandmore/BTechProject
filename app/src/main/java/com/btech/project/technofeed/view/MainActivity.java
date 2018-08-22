@@ -123,13 +123,13 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 .withIcon(R.mipmap.ic_theverge).withTypeface(montserrat_regular).withSelectedTextColor(getColor(R.color.colorTheme));
         SecondaryDrawerItem item9 = new SecondaryDrawerItem().withIdentifier(9).withName("MORE INFO")
                 .withTypeface(montserrat_regular).withSelectable(false).withTextColor(getColor(R.color.colorPrimaryText));
-        SecondaryDrawerItem item10 = new SecondaryDrawerItem().withIdentifier(10).withName("About the app")
+        SecondaryDrawerItem item10 = new SecondaryDrawerItem().withIdentifier(10).withName("About The App")
                 .withIcon(R.drawable.ic_info).withTypeface(montserrat_regular).withSelectedTextColor(getColor(R.color.colorTheme));
         SecondaryDrawerItem item11 = new SecondaryDrawerItem().withIdentifier(11).withName("Open Source")
                 .withIcon(R.drawable.ic_code).withTypeface(montserrat_regular).withSelectedTextColor(getColor(R.color.colorTheme));
-        SecondaryDrawerItem item12 = new SecondaryDrawerItem().withIdentifier(12).withName("Send feedback")
+        SecondaryDrawerItem item12 = new SecondaryDrawerItem().withIdentifier(12).withName("Send Feedback")
                 .withIcon(R.drawable.ic_mail).withTypeface(montserrat_regular).withSelectedTextColor(getColor(R.color.colorTheme));
-        SecondaryDrawerItem item13 = new SecondaryDrawerItem().withIdentifier(13).withName("Powered by newsapi.org")
+        SecondaryDrawerItem item13 = new SecondaryDrawerItem().withIdentifier(13).withName("Powered By NewsAPI")
                 .withIcon(R.drawable.ic_power).withTypeface(montserrat_regular).withSelectedTextColor(getColor(R.color.colorTheme));
         result = new DrawerBuilder()
                 .withActivity(this)
@@ -295,7 +295,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     private void onLoadingSwipeRefreshLayout() {
         if (!UtilityMethods.isNetworkAvailable()) {
-            Snackbar snackbar = Snackbar.make(findViewById(R.id.main_activity), "No internet connection", Snackbar.LENGTH_LONG);
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.main_activity), "No Internet Connection!", Snackbar.LENGTH_LONG);
             snackbar.show();
         }
         swipeRefreshLayout.post(
@@ -325,6 +325,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 break;
             case R.id.action_logout:
                 signOut();
+                Toast.makeText(getBaseContext(), "Bye!", Toast.LENGTH_SHORT).show();
                 openLoginActivity();
                 break;
             default:
@@ -351,7 +352,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 super.onBackPressed();
                 return;
             } else {
-                Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "Press back again to exit.", Toast.LENGTH_SHORT).show();
             }
 
             mBackPressed = System.currentTimeMillis();
@@ -407,6 +408,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     protected void sendEmail() {
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
         emailIntent.setData(Uri.parse("mailto: code_b1ooded@anandmore.gq"));
-        startActivity(Intent.createChooser(emailIntent, "Send feedback"));
+        startActivity(Intent.createChooser(emailIntent, "Send Feedback"));
     }
 }

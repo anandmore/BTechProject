@@ -11,5 +11,5 @@
     <color name="colorSecondaryText">#ffffff</color>
     <color name="colorSecondaryHintText">#c7c7c7</color>
     <color name="colorTransparent">@android:color/transparent</color>
-    <color name="colorTheme">#212121</color>
+    <color name="colorTheme">#344955</color>
 </resources>
