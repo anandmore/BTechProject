@@ -7,14 +7,12 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="com.btech.project.technofeed.view.WebViewActivity">
-
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
         app:elevation="0dp">
-
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_web_view"
             android:layout_width="match_parent"
@@ -22,7 +20,6 @@
             android:background="@color/colorPrimaryDark"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
             <TextView
                 android:id="@+id/toolbar_title_web_view"
                 android:layout_width="wrap_content"
@@ -30,13 +27,9 @@
                 android:maxLines="1"
                 android:textColor="@color/menuText"
                 android:textSize="12sp" />
-
         </android.support.v7.widget.Toolbar>
-
     </android.support.design.widget.AppBarLayout>
-
     <include layout="@layout/content_browser_full" />
-
     <ProgressBar
         android:id="@+id/progressBar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -46,5 +39,4 @@
         android:indeterminate="true"
         android:visibility="gone"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
 </android.support.design.widget.CoordinatorLayout>

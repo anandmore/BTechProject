@@ -1,16 +1,10 @@
 package com.btech.project.technofeed.network.interceptors;
-
 import android.support.annotation.NonNull;
-
 import com.btech.project.technofeed.util.UtilityMethods;
-
 import java.io.IOException;
-
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
-
-
 public class OfflineResponseCacheInterceptor implements Interceptor {
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {

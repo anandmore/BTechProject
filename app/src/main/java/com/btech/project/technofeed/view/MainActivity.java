@@ -1,9 +1,7 @@
 package com.btech.project.technofeed.view;
-
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -18,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.btech.project.technofeed.R;
 import com.btech.project.technofeed.TechnoFeedApplication;
 import com.btech.project.technofeed.adapter.DataAdapter;
@@ -30,6 +27,8 @@ import com.btech.project.technofeed.network.ApiInterface;
 import com.btech.project.technofeed.network.interceptors.OfflineResponseCacheInterceptor;
 import com.btech.project.technofeed.network.interceptors.ResponseCacheInterceptor;
 import com.btech.project.technofeed.util.UtilityMethods;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -38,11 +37,9 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
-
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -50,9 +47,7 @@ import okhttp3.logging.HttpLoggingInterceptor.Level;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
-
     private static final int TIME_INTERVAL = 2000;
     public String URL;
     public Boolean TOP;
@@ -69,26 +64,22 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private Typeface montserrat_regular;
     private TextView mTitle;
     private long mBackPressed;
-
+    private FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         AssetManager assetManager = this.getApplicationContext().getAssets();
         montserrat_regular = Typeface.createFromAsset(assetManager, "fonts/Montserrat-Regular.ttf");
-
         createToolbar();
         createRecyclerView();
-
         SOURCE = SOURCE_ARRAY[0];
         TOP = true;
         mTitle.setText(R.string.toolbar_default_text);
         onLoadingSwipeRefreshLayout();
-
         createDrawer(savedInstanceState, toolbar, montserrat_regular);
+        auth = FirebaseAuth.getInstance();
     }
-
     private void createToolbar() {
         toolbar = findViewById(R.id.toolbar_main_activity);
         setSupportActionBar(toolbar);
@@ -98,7 +89,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         mTitle = findViewById(R.id.toolbar_title);
         mTitle.setTypeface(montserrat_regular);
     }
-
     private void createRecyclerView() {
         recyclerView = findViewById(R.id.card_recycler_view);
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
@@ -106,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
     }
-
     private void createDrawer(Bundle savedInstanceState, final Toolbar toolbar, Typeface montserrat_regular) {
         PrimaryDrawerItem item0 = new PrimaryDrawerItem().withIdentifier(0).withName("Top Headlines")
                 .withIcon(R.drawable.ic_whatshot).withTypeface(montserrat_regular);
@@ -134,13 +123,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 .withIcon(R.drawable.ic_code).withTypeface(montserrat_regular);
         SecondaryDrawerItem item12 = new SecondaryDrawerItem().withIdentifier(12).withName("Powered by newsapi.org")
                 .withIcon(R.drawable.ic_power).withTypeface(montserrat_regular);
-
         accountHeader = new AccountHeaderBuilder()
                 .withActivity(this)
                 .withHeaderBackground(R.raw.ic_background)
                 .withSavedInstance(savedInstanceState)
                 .build();
-
         result = new DrawerBuilder()
                 .withAccountHeader(accountHeader)
                 .withActivity(this)
@@ -221,13 +208,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 .withSavedInstance(savedInstanceState)
                 .build();
     }
-
     private void loadTopJSON() {
         swipeRefreshLayout.setRefreshing(true);
-
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(Level.BODY);
-
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addNetworkInterceptor(new ResponseCacheInterceptor());
         httpClient.addInterceptor(new OfflineResponseCacheInterceptor());
@@ -235,45 +219,33 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         httpClient.readTimeout(60, TimeUnit.SECONDS);
         httpClient.connectTimeout(60, TimeUnit.SECONDS);
         httpClient.addInterceptor(logging);
-
         ApiInterface request = ApiClient.getClient(httpClient).create(ApiInterface.class);
-
         String country = "in";
         String category = "technology";
         Call<NewsResponse> call = request.getTopHeadlines(country, category, Constants.API_KEY);
         call.enqueue(new Callback<NewsResponse>() {
-
             @Override
             public void onResponse(@NonNull Call<NewsResponse> call, @NonNull Response<NewsResponse> response) {
-
                 if (response.isSuccessful() && response.body().getArticles() != null) {
-
                     if (!articleStructure.isEmpty()) {
                         articleStructure.clear();
                     }
-
                     articleStructure = response.body().getArticles();
-
                     adapter = new DataAdapter(MainActivity.this, articleStructure);
                     recyclerView.setAdapter(adapter);
                     swipeRefreshLayout.setRefreshing(false);
                 }
             }
-
-
             @Override
             public void onFailure(@NonNull Call<NewsResponse> call, @NonNull Throwable t) {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
-
     private void loadJSON() {
         swipeRefreshLayout.setRefreshing(true);
-
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(Level.BODY);
-
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addNetworkInterceptor(new ResponseCacheInterceptor());
         httpClient.addInterceptor(new OfflineResponseCacheInterceptor());
@@ -281,37 +253,27 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         httpClient.readTimeout(60, TimeUnit.SECONDS);
         httpClient.connectTimeout(60, TimeUnit.SECONDS);
         httpClient.addInterceptor(logging);
-
         ApiInterface request = ApiClient.getClient(httpClient).create(ApiInterface.class);
-
         Call<NewsResponse> call = request.getHeadlines(SOURCE, Constants.API_KEY);
         call.enqueue(new Callback<NewsResponse>() {
-
             @Override
             public void onResponse(@NonNull Call<NewsResponse> call, @NonNull Response<NewsResponse> response) {
-
                 if (response.isSuccessful() && response.body().getArticles() != null) {
-
                     if (!articleStructure.isEmpty()) {
                         articleStructure.clear();
                     }
-
                     articleStructure = response.body().getArticles();
-
                     adapter = new DataAdapter(MainActivity.this, articleStructure);
                     recyclerView.setAdapter(adapter);
                     swipeRefreshLayout.setRefreshing(false);
                 }
             }
-
-
             @Override
             public void onFailure(@NonNull Call<NewsResponse> call, @NonNull Throwable t) {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
-
     @Override
     public void onRefresh() {
         if (TOP == true) {
@@ -320,7 +282,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             loadJSON();
         }
     }
-
     private void onLoadingSwipeRefreshLayout() {
         if (!UtilityMethods.isNetworkAvailable()) {
             Snackbar snackbar = Snackbar.make(findViewById(R.id.main_activity), "No internet connection", Snackbar.LENGTH_LONG);
@@ -339,44 +300,35 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 }
         );
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.action_search:
                 openSearchActivity();
+                break;
+            case R.id.action_logout:
+                signOut();
+                openLoginActivity();
                 break;
             default:
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
-
-
     private void openAboutActivity() {
         Intent aboutIntent = new Intent(this, AboutActivity.class);
         startActivity(aboutIntent);
         this.overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
     }
-
     private void openSearchActivity() {
         Intent searchIntent = new Intent(this, SearchActivity.class);
         startActivity(searchIntent);
         this.overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
     }
-
-    private void sendEmail() {
-        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-        emailIntent.setData(Uri.parse("mailto: code_b1ooded@anandmore.gq"));
-        startActivity(Intent.createChooser(emailIntent, "Send feedback"));
-    }
-
     public void onBackPressed() {
         if (result.isDrawerOpen()) {
             result.closeDrawer();
@@ -391,19 +343,16 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             mBackPressed = System.currentTimeMillis();
         }
     }
-
     @Override
     protected void onSaveInstanceState(Bundle bundle) {
         bundle = result.saveInstanceState(bundle);
         bundle = accountHeader.saveInstanceState(bundle);
-
         super.onSaveInstanceState(bundle);
         listState = recyclerView.getLayoutManager().onSaveInstanceState();
         bundle.putParcelable(Constants.RECYCLER_STATE_KEY, listState);
         bundle.putString(Constants.SOURCE, SOURCE);
         bundle.putString(Constants.TITLE_STATE_KEY, mTitle.getText().toString());
     }
-
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
@@ -415,7 +364,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             createDrawer(savedInstanceState, toolbar, montserrat_regular);
         }
     }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -423,11 +371,19 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             recyclerView.getLayoutManager().onRestoreInstanceState(listState);
         }
     }
-
     private void openWebViewActivity() {
         Intent browserIntent = new Intent(MainActivity.this, WebViewActivity.class);
         browserIntent.putExtra(Constants.INTENT_URL, URL);
         startActivity(browserIntent);
         this.overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+    }
+    public void signOut() {
+        auth.signOut();
+    }
+    private void openLoginActivity() {
+        Intent loginIntent = new Intent(this, LoginActivity.class);
+        startActivity(loginIntent);
+        this.overridePendingTransition(R.anim.pull_in_right, R.anim.push_out_left);
+        finish();
     }
 }

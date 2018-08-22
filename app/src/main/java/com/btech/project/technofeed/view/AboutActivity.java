@@ -1,5 +1,4 @@
 package com.btech.project.technofeed.view;
-
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
@@ -13,42 +12,30 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
 import com.btech.project.technofeed.BuildConfig;
 import com.btech.project.technofeed.R;
 import com.btech.project.technofeed.model.Constants;
-
 public class AboutActivity extends AppCompatActivity {
-
     public String URL;
     private Typeface montserrat_regular;
     private Typeface montserrat_semiBold;
     private String versionName;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-
         createToolbar();
-
         floatingButton();
-
         assetManager();
-
         createInfoTextView();
         createLibraryCardViews();
-
         versionName = "v" + BuildConfig.VERSION_NAME;
-
     }
-
     private void assetManager() {
         AssetManager assetManager = this.getApplicationContext().getAssets();
         montserrat_regular = Typeface.createFromAsset(assetManager, "fonts/Montserrat-Regular.ttf");
         montserrat_semiBold = Typeface.createFromAsset(assetManager, "fonts/Montserrat-SemiBold.ttf");
     }
-
     private void createInfoTextView() {
         TextView cardInfo1 = findViewById(R.id.tv_card_info_anand);
         TextView cardInfo2 = findViewById(R.id.tv_card_info_ritesh);
@@ -63,7 +50,6 @@ public class AboutActivity extends AppCompatActivity {
         TextView author3 = findViewById(R.id.tv_author3);
         TextView info4 = findViewById(R.id.tv_info4);
         TextView author4 = findViewById(R.id.tv_author4);
-
         cardInfo1.setTypeface(montserrat_regular);
         cardInfo2.setTypeface(montserrat_regular);
         cardInfo3.setTypeface(montserrat_regular);
@@ -78,7 +64,6 @@ public class AboutActivity extends AppCompatActivity {
         info4.setTypeface(montserrat_semiBold);
         author4.setTypeface(montserrat_regular);
     }
-
     private void createLibraryCardViews() {
         CardView cardViewInfo1 = findViewById(R.id.card_info_anand);
         CardView cardViewInfo2 = findViewById(R.id.card_info_ritesh);
@@ -87,8 +72,6 @@ public class AboutActivity extends AppCompatActivity {
         CardView cardViewLibrary2 = findViewById(R.id.cardView2);
         CardView cardViewLibrary3 = findViewById(R.id.cardView3);
         CardView cardViewLibrary4 = findViewById(R.id.cardView4);
-
-
         cardViewInfo1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +79,6 @@ public class AboutActivity extends AppCompatActivity {
                 openWebViewActivity();
             }
         });
-
         cardViewInfo2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,7 +86,6 @@ public class AboutActivity extends AppCompatActivity {
                 openWebViewActivity();
             }
         });
-
         cardViewInfo3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,7 +93,6 @@ public class AboutActivity extends AppCompatActivity {
                 openWebViewActivity();
             }
         });
-
         cardViewLibrary1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,7 +100,6 @@ public class AboutActivity extends AppCompatActivity {
                 openWebViewActivity();
             }
         });
-
         cardViewLibrary2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,7 +107,6 @@ public class AboutActivity extends AppCompatActivity {
                 openWebViewActivity();
             }
         });
-
         cardViewLibrary3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,7 +114,6 @@ public class AboutActivity extends AppCompatActivity {
                 openWebViewActivity();
             }
         });
-
         cardViewLibrary4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,7 +122,6 @@ public class AboutActivity extends AppCompatActivity {
             }
         });
     }
-
     private void floatingButton() {
         FloatingActionButton fab = findViewById(R.id.fab_about);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -155,7 +131,6 @@ public class AboutActivity extends AppCompatActivity {
             }
         });
     }
-
     private void createToolbar() {
         final Toolbar toolbar = findViewById(R.id.toolbar_layout_about);
         setSupportActionBar(toolbar);
@@ -163,14 +138,11 @@ public class AboutActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         final TextView toolbarTitle = findViewById(R.id.toolbar_title_about);
-
         AppBarLayout appBarLayout = findViewById(R.id.app_bar_about);
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             boolean isShow = false;
             int scrollRange = -1;
-
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if (scrollRange == -1) {
@@ -188,9 +160,7 @@ public class AboutActivity extends AppCompatActivity {
             }
         });
     }
-
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
@@ -198,19 +168,16 @@ public class AboutActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
     protected void sendEmail() {
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
         emailIntent.setData(Uri.parse("mailto: code_b1ooded@anandmore.gq@gmail.com"));
         startActivity(Intent.createChooser(emailIntent, "Send feedback"));
     }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.pull_in_left, R.anim.push_out_right);
     }
-
     private void openWebViewActivity() {
         Intent browserIntent = new Intent(AboutActivity.this, WebViewActivity.class);
         browserIntent.putExtra(Constants.INTENT_URL, URL);

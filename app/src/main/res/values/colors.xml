@@ -12,11 +12,22 @@
     <color name="hintText">#C7C7C7</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
-
     <color name="material_drawer_background">#484848</color>
     <color name="material_drawer_primary_text">#C7C7C7</color>
     <color name="material_drawer_secondary_text">#C7C7C7</color>
     <color name="material_drawer_selected">#212121</color>
     <color name="material_drawer_selected_text">#FFFFFF</color>
     <color name="material_drawer_header_selection_text">#FFFFFF</color>
+    <color name="bg_login">#26ae90</color>
+    <color name="bg_register">#2e3237</color>
+    <color name="bg_main">#428bca</color>
+    <color name="input_login">#222222</color>
+    <color name="input_login_hint">#999999</color>
+    <color name="input_register">#888888</color>
+    <color name="input_register_bg">#3b4148</color>
+    <color name="input_register_hint">#5e6266</color>
+    <color name="btn_login">#26ae90</color>
+    <color name="btn_login_bg">#eceef1</color>
+    <color name="lbl_name">#333333</color>
+    <color name="btn_logut_bg">#ff6861</color>
 </resources>

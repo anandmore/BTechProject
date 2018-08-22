@@ -9,14 +9,12 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.btech.project.technofeed.view.ArticleActivity"
     tools:showIn="@layout/activity_article">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="16dp"
         android:orientation="vertical">
-
         <TextView
             android:id="@+id/content_Headline"
             android:layout_width="match_parent"
@@ -31,7 +29,6 @@
             android:textSize="@dimen/text_size_big"
             android:textStyle="bold"
             tools:text="Headline" />
-
         <TextView
             android:id="@+id/content_Description"
             android:layout_width="wrap_content"
@@ -47,7 +44,6 @@
             android:textSize="@dimen/text_size_medium"
             android:textStyle="normal"
             tools:text="Story" />
-
         <Button
             android:id="@+id/article_button"
             android:layout_width="match_parent"
@@ -62,7 +58,5 @@
             android:textAllCaps="false"
             android:textColor="@color/button_text_color"
             android:textSize="@dimen/text_size_button" />
-
     </LinearLayout>
-
 </android.support.v4.widget.NestedScrollView>

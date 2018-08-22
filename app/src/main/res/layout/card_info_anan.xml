@@ -15,11 +15,9 @@
     card_view:cardBackgroundColor="@color/colorCardView"
     card_view:cardCornerRadius="@dimen/card_layout_corner_radius"
     card_view:cardElevation="@dimen/card_layout_elevation">
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="60dp">
-
         <ImageView
             android:id="@+id/iv_card_info_anan"
             android:layout_width="60dp"
@@ -29,7 +27,6 @@
             android:contentDescription="@string/iv_card_my_info"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_anan" />
-
         <TextView
             android:id="@+id/tv_card_info_anan"
             android:layout_width="match_parent"
@@ -45,6 +42,5 @@
             android:textColor="@color/cardText"
             android:textSize="16sp"
             android:textStyle="normal" />
-
     </RelativeLayout>
 </android.support.v7.widget.CardView>

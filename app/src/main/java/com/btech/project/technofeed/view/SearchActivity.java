@@ -1,5 +1,4 @@
 package com.btech.project.technofeed.view;
-
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -18,7 +17,6 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.btech.project.technofeed.R;
 import com.btech.project.technofeed.TechnoFeedApplication;
 import com.btech.project.technofeed.adapter.DataAdapter;
@@ -30,20 +28,16 @@ import com.btech.project.technofeed.network.ApiInterface;
 import com.btech.project.technofeed.network.interceptors.OfflineResponseCacheInterceptor;
 import com.btech.project.technofeed.network.interceptors.ResponseCacheInterceptor;
 import com.btech.project.technofeed.util.UtilityMethods;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
-
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 public class SearchActivity extends AppCompatActivity {
-
     private EditText mEdtSearch;
     private TextView mTxvNoResultsFound;
     private SwipeRefreshLayout mSwipeRefreshSearch;
@@ -51,18 +45,14 @@ public class SearchActivity extends AppCompatActivity {
     private DataAdapter adapter;
     private Typeface montserrat_regular;
     private ArrayList<ArticleStructure> articleStructure = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
         AssetManager assetManager = this.getApplicationContext().getAssets();
         montserrat_regular = Typeface.createFromAsset(assetManager, "fonts/Montserrat-Regular.ttf");
-
         createToolbar();
         initViews();
-
         mEdtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -76,16 +66,13 @@ public class SearchActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         mSwipeRefreshSearch.setEnabled(false);
         mSwipeRefreshSearch.setColorSchemeResources(R.color.colorPrimary);
-
         if (!UtilityMethods.isNetworkAvailable()) {
             Snackbar snackbar = Snackbar.make(findViewById(R.id.root_layout), "No internet connection", Snackbar.LENGTH_LONG);
             snackbar.show();
         }
     }
-
     private void createToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar_search);
         setSupportActionBar(toolbar);
@@ -102,7 +89,6 @@ public class SearchActivity extends AppCompatActivity {
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
-
     private void initViews() {
         mEdtSearch = findViewById(R.id.editText_search);
         mEdtSearch.setTypeface(montserrat_regular);
@@ -111,14 +97,11 @@ public class SearchActivity extends AppCompatActivity {
         mTxvNoResultsFound = findViewById(R.id.tv_no_results);
         mRecyclerViewSearch.setLayoutManager(new LinearLayoutManager(SearchActivity.this));
     }
-
     private void searchEverything(final String search) {
         mSwipeRefreshSearch.setEnabled(true);
         mSwipeRefreshSearch.setRefreshing(true);
-
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addNetworkInterceptor(new ResponseCacheInterceptor());
         httpClient.addInterceptor(new OfflineResponseCacheInterceptor());
@@ -127,24 +110,18 @@ public class SearchActivity extends AppCompatActivity {
         httpClient.readTimeout(60, TimeUnit.SECONDS);
         httpClient.connectTimeout(60, TimeUnit.SECONDS);
         httpClient.addInterceptor(logging);
-
         ApiInterface request = ApiClient.getClient(httpClient).create(ApiInterface.class);
-
         String sortBy = "publishedAt";
         String language = "en";
         Call<NewsResponse> call = request.getSearchResults(search, sortBy, language, Constants.API_KEY);
         call.enqueue(new Callback<NewsResponse>() {
-
             @Override
             public void onResponse(@NonNull Call<NewsResponse> call, @NonNull Response<NewsResponse> response) {
-
                 if (response.isSuccessful() && response.body().getArticles() != null) {
-
                     if (response.body().getTotalResults() != 0) {
                         if (!articleStructure.isEmpty()) {
                             articleStructure.clear();
                         }
-
                         articleStructure = response.body().getArticles();
                         adapter = new DataAdapter(SearchActivity.this, articleStructure);
                         mRecyclerViewSearch.setVisibility(View.VISIBLE);
@@ -161,8 +138,6 @@ public class SearchActivity extends AppCompatActivity {
                     }
                 }
             }
-
-
             @Override
             public void onFailure(@NonNull Call<NewsResponse> call, @NonNull Throwable t) {
                 mSwipeRefreshSearch.setRefreshing(false);
@@ -170,13 +145,11 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_cancel:
@@ -191,11 +164,9 @@ public class SearchActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
     private void cancelSearch() {
         onBackPressed();
     }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
